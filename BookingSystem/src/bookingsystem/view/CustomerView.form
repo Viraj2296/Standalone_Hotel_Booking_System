@@ -28,28 +28,34 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="custidlabel" min="-2" pref="74" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="custidtxtfield" min="-2" pref="71" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="custnamelabel" pref="89" max="32767" attributes="0"/>
-                                  <Component id="custphonelabel" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="custnamelabel" max="32767" attributes="0"/>
+                                      <Component id="custdoblabel" max="32767" attributes="0"/>
+                                      <Component id="custsalarylabel" max="32767" attributes="0"/>
+                                      <Component id="custaddresslabel" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="custdobtxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Component id="custnametxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Component id="custsalarytxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Component id="custaddresstxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="custphonetxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                                  <Component id="custnametxtfield" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="savebutton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="updatebutton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="deletebutton" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="savebutton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="updatebutton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="deletebutton" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="452" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -69,23 +75,33 @@
                           <Component id="custidlabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="custidtxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="custnamelabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="custnametxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="custphonelabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custphonetxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="custdoblabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="custdobtxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="custsalarylabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="custsalarytxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="custaddresslabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="custaddresstxtfield" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="savebutton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="updatebutton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="deletebutton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="139" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="56" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -110,6 +126,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custidtxtfield">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custidtxtfieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="custnametxtfield">
       <Events>
@@ -121,12 +140,12 @@
         <Property name="text" type="java.lang.String" value="Customer Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="custphonelabel">
+    <Component class="javax.swing.JLabel" name="custdoblabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Customer Phone"/>
+        <Property name="text" type="java.lang.String" value="Customer DOB"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="custphonetxtfield">
+    <Component class="javax.swing.JTextField" name="custdobtxtfield">
     </Component>
     <Component class="javax.swing.JButton" name="savebutton">
       <Properties>
@@ -173,5 +192,19 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="custsalarylabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Customer Salary"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="custsalarytxtfield">
+    </Component>
+    <Component class="javax.swing.JTextField" name="custaddresstxtfield">
+    </Component>
+    <Component class="javax.swing.JLabel" name="custaddresslabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Customer Address"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
