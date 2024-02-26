@@ -34,6 +34,7 @@ public class CustomerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         custidlabel = new javax.swing.JLabel();
         custidtxtfield = new javax.swing.JTextField();
@@ -50,6 +51,8 @@ public class CustomerView extends javax.swing.JFrame {
         custsalarytxtfield = new javax.swing.JTextField();
         custaddresstxtfield = new javax.swing.JTextField();
         custaddresslabel = new javax.swing.JLabel();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +77,12 @@ public class CustomerView extends javax.swing.JFrame {
         custnamelabel.setText("Customer Name");
 
         custdoblabel.setText("Customer DOB");
+
+        custdobtxtfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custdobtxtfieldActionPerformed(evt);
+            }
+        });
 
         savebutton.setText("Save");
         savebutton.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +119,12 @@ public class CustomerView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         custsalarylabel.setText("Customer Salary");
+
+        custaddresstxtfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custaddresstxtfieldActionPerformed(evt);
+            }
+        });
 
         custaddresslabel.setText("Customer Address");
 
@@ -208,6 +223,14 @@ public class CustomerView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_custidtxtfieldActionPerformed
 
+    private void custdobtxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custdobtxtfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custdobtxtfieldActionPerformed
+
+    private void custaddresstxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custaddresstxtfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custaddresstxtfieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +278,7 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JLabel custsalarylabel;
     private javax.swing.JTextField custsalarytxtfield;
     private javax.swing.JButton deletebutton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -263,19 +287,21 @@ public class CustomerView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void saveCustomer(){
+        CustomerDto dto = new CustomerDto();
+        dto.setCustId(custidtxtfield.getText());
+        dto.setCustname(custnametxtfield.getText());
+        dto.setCustdob(custdobtxtfield.getText());
+        //dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
+        dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
+        dto.setCustaddress(custaddresstxtfield.getText());
         try {
-            CustomerDto customerDto = new CustomerDto(custidtxtfield.getText(), custnametxtfield.getText(), custdobtxtfield.getText(), Double.parseDouble(custsalarytxtfield.getText()), custaddresstxtfield.getText());
-            String resp = customerController.save(customerDto);
+            //String result = customerController.saveCustomer(dto);
+            //CustomerDto customerDto = new CustomerDto(custidtxtfield.getText(), custnametxtfield.getText(), custdobtxtfield.getText(), Double.parseDouble(custsalarytxtfield.getText()), custaddresstxtfield.getText());
+            String resp = customerController.save(dto);
             JOptionPane.showMessageDialog(this, resp);
         } catch (Exception ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-
-
-
 }
-
-
-

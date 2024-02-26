@@ -5,14 +5,16 @@
 package bookingsystem.service.custom;
 
 import bookingsystem.dto.CustomerDto;
-import java.awt.List;
+import bookingsystem.service.Superservice;
+import java.util.ArrayList;
 
 /**
  *
  * @author Dell
  */
-public interface CustomerService {
-    String addCustomer(CustomerDto dto) throws Exception;
+
+public interface CustomerService extends Superservice {
+    String saveCustomer(CustomerDto dto) throws Exception;
 
     String updateCustomer(CustomerDto dto) throws Exception;
 
@@ -20,5 +22,5 @@ public interface CustomerService {
     
     CustomerDto getCustomer(String id) throws Exception;
     
-    List<CustomerDto> getAll() throws Exception;
+    ArrayList<CustomerDto> getAll() throws Exception;
 }

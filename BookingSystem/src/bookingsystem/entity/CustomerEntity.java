@@ -2,24 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bookingsystem.dto;
+package bookingsystem.entity;
 
 /**
  *
  * @author Dell
  */
-public class CustomerDto {
-
+public class CustomerEntity {
     private String custId;
     private String custname;
     private String custdob;
     private Double custsalary;
     private String custaddress;
-
-    public CustomerDto() {
-    }
-
-    public CustomerDto(String custId, String name, String dob, Double salary, String address) {
+    
+    public CustomerEntity(){}
+    
+    public CustomerEntity(String custId, String name, String dob, Double salary, String address) {
         this.custId = custId;
         this.custname = name;
         this.custdob = dob;
@@ -99,6 +97,6 @@ public class CustomerDto {
 
     @Override
     public String toString() {
-        return "CustomerDto{" + "custId=" + custId + ", custname=" + custname + ", custdob=" + custdob + ", custsalary=" + custsalary + ", custaddress=" + custaddress + '}';
+        return "CustomerEntity{" + "custId=" + custId + ", custname=" + custname + ", custdob=" + custdob + ", custsalary=" + custsalary + ", custaddress=" + custaddress + '}';
     }
 }
