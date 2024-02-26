@@ -9,5 +9,5 @@ package bookingsystem.dto;
  * @author Dell
  */
 public class CustomerDto {
-    
+   private String  
 }
