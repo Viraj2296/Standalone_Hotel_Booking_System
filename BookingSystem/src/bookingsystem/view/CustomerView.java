@@ -6,14 +6,18 @@ package bookingsystem.view;
 
 import bookingsystem.controller.CustomerController;
 import bookingsystem.dto.CustomerDto;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author Dell
  */
+
 public class CustomerView extends javax.swing.JFrame {
     
     private CustomerController customerController;
@@ -22,7 +26,9 @@ public class CustomerView extends javax.swing.JFrame {
      * Creates new form CustomerView
      */
     public CustomerView() {
+        customerController = new CustomerController();
         initComponents();
+        loadCustomers();
     }
 
     /**
@@ -46,7 +52,7 @@ public class CustomerView extends javax.swing.JFrame {
         updatebutton = new javax.swing.JButton();
         deletebutton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCutomer = new javax.swing.JTable();
         custsalarylabel = new javax.swing.JLabel();
         custsalarytxtfield = new javax.swing.JTextField();
         custaddresstxtfield = new javax.swing.JTextField();
@@ -56,7 +62,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Customers");
 
@@ -105,7 +111,7 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCutomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -116,7 +122,12 @@ public class CustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblCutomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCutomerMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCutomer);
 
         custsalarylabel.setText("Customer Salary");
 
@@ -195,7 +206,7 @@ public class CustomerView extends javax.swing.JFrame {
                         .addComponent(updatebutton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deletebutton)
-                        .addGap(0, 56, Short.MAX_VALUE))
+                        .addGap(0, 51, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -208,11 +219,11 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_savebuttonActionPerformed
 
     private void updatebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebuttonActionPerformed
-        // TODO add your handling code here:
+        updateCustomer();
     }//GEN-LAST:event_updatebuttonActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-        // TODO add your handling code here:
+        deleteCustomer();
     }//GEN-LAST:event_deletebuttonActionPerformed
 
     private void custnametxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custnametxtfieldActionPerformed
@@ -230,6 +241,10 @@ public class CustomerView extends javax.swing.JFrame {
     private void custaddresstxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custaddresstxtfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custaddresstxtfieldActionPerformed
+
+    private void tblCutomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCutomerMouseClicked
+        searchCustomer();
+    }//GEN-LAST:event_tblCutomerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -281,8 +296,8 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton savebutton;
+    private javax.swing.JTable tblCutomer;
     private javax.swing.JButton updatebutton;
     // End of variables declaration//GEN-END:variables
 
@@ -291,7 +306,6 @@ public class CustomerView extends javax.swing.JFrame {
         dto.setCustId(custidtxtfield.getText());
         dto.setCustname(custnametxtfield.getText());
         dto.setCustdob(custdobtxtfield.getText());
-        //dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
         dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
         dto.setCustaddress(custaddresstxtfield.getText());
         try {
@@ -299,6 +313,92 @@ public class CustomerView extends javax.swing.JFrame {
             //CustomerDto customerDto = new CustomerDto(custidtxtfield.getText(), custnametxtfield.getText(), custdobtxtfield.getText(), Double.parseDouble(custsalarytxtfield.getText()), custaddresstxtfield.getText());
             String resp = customerController.save(dto);
             JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    public void clear(){
+        custidtxtfield.setText("");
+        custnametxtfield.setText("");
+        custdobtxtfield.setText("");
+        custsalarytxtfield.setText("");
+        custaddresstxtfield.setText("");
+    }
+    
+    public void searchCustomer() {
+        try {
+            String custId = tblCutomer.getValueAt(tblCutomer.getSelectedRow(), 0).toString();
+            System.out.println(custId);
+            CustomerDto customerDto = customerController.getCustomer(custId);
+
+            if (customerDto != null) {
+                custidtxtfield.setText(customerDto.getCustId());
+                custnametxtfield.setText(customerDto.getCustname());
+                custdobtxtfield.setText(customerDto.getCustdob());
+                custsalarytxtfield.setText(Double.toString(customerDto.getCustsalary()));
+                custaddresstxtfield.setText(customerDto.getCustaddress());
+            } else {
+                JOptionPane.showMessageDialog(this, "Customer Not Found");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error at loading Customer Data");
+        }
+    }
+    
+    public void loadCustomers(){
+        try {
+            String columns[] = {"Id", "Name", "DOB", "Salary", "Address"};
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            
+            tblCutomer.setModel(dtm);
+
+            ArrayList<CustomerDto> customerDtos = customerController.getAllCustomer();
+
+            for (CustomerDto customerDto : customerDtos) {
+                Object[] rowData = {customerDto.getCustId(), customerDto.getCustname(), customerDto.getCustdob() , customerDto.getCustsalary(), customerDto.getCustaddress()};
+                dtm.addRow(rowData);  
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(bookingsystem.view.CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void updateCustomer(){
+        try {
+            CustomerDto dto = new CustomerDto();
+            dto.setCustId(custidtxtfield.getText());
+            dto.setCustname(custnametxtfield.getText());
+            dto.setCustdob(custdobtxtfield.getText());
+            dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
+            dto.setCustaddress(custaddresstxtfield.getText());
+            String resp = customerController.updateCustomer(dto);
+            JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void deleteCustomer(){
+        try {
+            String custId = custidtxtfield.getText();
+            String resp = customerController.deleteCustomer(custId);
+            JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
         } catch (Exception ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());

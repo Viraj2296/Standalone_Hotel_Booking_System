@@ -9,6 +9,7 @@ import bookingsystem.dao.custom.CustomerDao;
 import bookingsystem.entity.CustomerEntity;
 import java.util.ArrayList;
 
+import java.sql.ResultSet;
 /**
  *
  * @author Dell
@@ -24,24 +25,48 @@ public class CustomerDaoImpl implements CustomerDao{
                 t.getCustsalary(),
                 t.getCustaddress());
     }
-
+    
     @Override
     public boolean update(CustomerEntity t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return CrudUtil.executeUpdate("UPDATE Customer SET CustName=?,DOB=?, salary=?, CustAddress=? WHERE CustID=?",
+                t.getCustname(),
+                t.getCustdob(),
+                t.getCustsalary(),
+                t.getCustaddress(),
+                t.getCustId());
     }
 
     @Override
     public boolean delete(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return CrudUtil.executeUpdate("DELETE FROM Customer WHERE CustID=?", id);
     }
 
     @Override
     public CustomerEntity get(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM Customer WHERE CustID = ?", id);
+        while (rst.next()) {
+            return new CustomerEntity(
+                    rst.getString("CustID"),
+                    rst.getString("CustName"),
+                    rst.getString("DOB"),
+                    rst.getDouble("salary"),
+                    rst.getString("CustAddress"));
+            }
+        return null;
     }
 
     @Override
     public ArrayList<CustomerEntity> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    } 
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM Customer");
+        ArrayList<CustomerEntity> customerEntities = new ArrayList<>();
+        while (rst.next()) {
+            customerEntities.add(new CustomerEntity(
+                    rst.getString("CustID"),
+                    rst.getString("CustName"),
+                    rst.getString("DOB"),
+                    rst.getDouble("salary"),
+                    rst.getString("CustAddress")));
+        }  
+        return customerEntities;
+    }
 }

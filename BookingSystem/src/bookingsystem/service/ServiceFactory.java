@@ -5,6 +5,9 @@
 package bookingsystem.service;
 
 import bookingsystem.service.custom.impl.CustomerServiceImpl;
+import bookingsystem.service.custom.impl.ReservationServiceImpl;
+import bookingsystem.service.custom.impl.RoomCategoryServiceImpl;
+import bookingsystem.service.custom.impl.RoomServiceImpl;
 
 /**
  *
@@ -30,15 +33,18 @@ public class ServiceFactory {
                 //return new ItemServiceImpl();
             case CUSTOMER:
                 return new CustomerServiceImpl();
-            // case ORDER:
-                // return null;
-                //return new OrderServiceImpl();
+            case ROOMCATEGORY:
+                return new RoomCategoryServiceImpl();
+            case ROOM:
+                return new RoomServiceImpl();
+            case RESERVATION:
+                return new ReservationServiceImpl();
             default:
                 return null;
         }
     }
     
     public enum ServiceType{
-        CUSTOMER
+        CUSTOMER, ROOMCATEGORY, ROOM, RESERVATION
     }
 }

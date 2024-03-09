@@ -5,6 +5,10 @@
 package bookingsystem.dao;
 
 import bookingsystem.dao.custom.impl.CustomerDaoImpl;
+import bookingsystem.dao.custom.impl.ReservationDaoImpl;
+import bookingsystem.dao.custom.impl.ReservationItemDaoImpl;
+import bookingsystem.dao.custom.impl.RoomCategoryDaoImpl;
+import bookingsystem.dao.custom.impl.RoomDaoImpl;
 
 /**
  *
@@ -30,6 +34,14 @@ public class DaoFactory {
                 //return new ItemDaoImpl();
             case CUSTOMER:
                 return new CustomerDaoImpl();
+            case ROOMCATEGORY:
+                return new RoomCategoryDaoImpl();
+            case ROOM:
+                return new RoomDaoImpl();
+            case RESERVATION:
+                return new ReservationDaoImpl();
+            case RESERVATIONITEM:
+                return new ReservationItemDaoImpl();
             // case ORDER:
                 //return new OrderDaoImpl();
                 //return null;
@@ -42,6 +54,6 @@ public class DaoFactory {
     }
 
     public enum DaoType {
-       CUSTOMER
+       CUSTOMER,ROOMCATEGORY,ROOM,RESERVATION,RESERVATIONITEM
     }
 }

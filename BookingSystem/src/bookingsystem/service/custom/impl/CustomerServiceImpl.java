@@ -32,26 +32,50 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
-    @Override
+   @Override
     public String updateCustomer(CustomerDto dto) throws Exception {
-        return null;
+        CustomerEntity customerEntity = new CustomerEntity(
+                dto.getCustId(),
+                dto.getCustname(), dto.getCustdob(),
+                dto.getCustsalary(), dto.getCustaddress());
+
+        if (customerDao.update(customerEntity)) {
+            return "Successfully Updated";
+        } else {
+            return "Fail";
+        }
     }
 
     @Override
     public String deleteCustomer(String id) throws Exception {
-        return null;
+        if (customerDao.delete(id)) {
+            return "Successfully Deleted";
+        } else {
+            return "Fail";
+        }
     }
 
     @Override
     public CustomerDto getCustomer(String id) throws Exception {
+        CustomerEntity entity = customerDao.get(id);
+        if (entity != null) {
+            return new CustomerDto(entity.getCustId(),
+                    entity.getCustname(), entity.getCustdob(),
+                    entity.getCustsalary(), entity.getCustaddress());
+        }
         return null;
     }
 
+
     @Override
     public ArrayList<CustomerDto> getAll() throws Exception {
-        // Your implementation to fetch all customers and convert them to DTOs
-        ArrayList<CustomerDto> customers = new ArrayList<>();
-        // Logic to fetch customers and convert them to DTOs
-        return customers;
+        ArrayList<CustomerDto> customerDtos = new ArrayList<>();
+        ArrayList<CustomerEntity> customerEntities = customerDao.getAll();
+        for (CustomerEntity entity : customerEntities) {
+            customerDtos.add(new CustomerDto(entity.getCustId(),
+                    entity.getCustname(), entity.getCustdob(),
+                    entity.getCustsalary(), entity.getCustaddress()));
+        }
+        return customerDtos;
     }  
 }
