@@ -4,17 +4,31 @@
  */
 package bookingsystem.view;
 
+import bookingsystem.controller.CustomerController;
+import bookingsystem.dto.CustomerDto;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author Dell
  */
+
 public class CustomerView extends javax.swing.JFrame {
+    
+    private CustomerController customerController;
 
     /**
      * Creates new form CustomerView
      */
     public CustomerView() {
+        customerController = new CustomerController();
         initComponents();
+        loadCustomers();
     }
 
     /**
@@ -26,26 +40,39 @@ public class CustomerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         custidlabel = new javax.swing.JLabel();
         custidtxtfield = new javax.swing.JTextField();
         custnametxtfield = new javax.swing.JTextField();
         custnamelabel = new javax.swing.JLabel();
-        custphonelabel = new javax.swing.JLabel();
-        custphonetxtfield = new javax.swing.JTextField();
+        custdoblabel = new javax.swing.JLabel();
+        custdobtxtfield = new javax.swing.JTextField();
         savebutton = new javax.swing.JButton();
         updatebutton = new javax.swing.JButton();
         deletebutton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCutomer = new javax.swing.JTable();
+        custsalarylabel = new javax.swing.JLabel();
+        custsalarytxtfield = new javax.swing.JTextField();
+        custaddresstxtfield = new javax.swing.JTextField();
+        custaddresslabel = new javax.swing.JLabel();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Customers");
 
         custidlabel.setText("Customer ID");
+
+        custidtxtfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custidtxtfieldActionPerformed(evt);
+            }
+        });
 
         custnametxtfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +82,13 @@ public class CustomerView extends javax.swing.JFrame {
 
         custnamelabel.setText("Customer Name");
 
-        custphonelabel.setText("Customer Phone");
+        custdoblabel.setText("Customer DOB");
+
+        custdobtxtfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custdobtxtfieldActionPerformed(evt);
+            }
+        });
 
         savebutton.setText("Save");
         savebutton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +111,7 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCutomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -89,7 +122,22 @@ public class CustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblCutomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCutomerMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCutomer);
+
+        custsalarylabel.setText("Customer Salary");
+
+        custaddresstxtfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custaddresstxtfieldActionPerformed(evt);
+            }
+        });
+
+        custaddresslabel.setText("Customer Address");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,23 +148,28 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(custidlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
+                                .addGap(34, 34, 34)
                                 .addComponent(custidtxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(custnamelabel, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                                    .addComponent(custphonelabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(custphonetxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(custnametxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(savebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(updatebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deletebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(custnamelabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(custdoblabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(custsalarylabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(custaddresslabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(custdobtxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(custnametxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(custsalarytxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(custaddresstxtfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(savebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(updatebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(deletebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -131,21 +184,29 @@ public class CustomerView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(custidlabel)
                             .addComponent(custidtxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(custnamelabel)
                             .addComponent(custnametxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(custphonelabel)
-                            .addComponent(custphonetxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(custdoblabel)
+                            .addComponent(custdobtxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(custsalarylabel)
+                            .addComponent(custsalarytxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(custaddresslabel)
+                            .addComponent(custaddresstxtfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(savebutton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(updatebutton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deletebutton)
-                        .addGap(0, 139, Short.MAX_VALUE))
+                        .addGap(0, 51, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -154,20 +215,36 @@ public class CustomerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void savebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebuttonActionPerformed
-        // TODO add your handling code here:
+        saveCustomer();
     }//GEN-LAST:event_savebuttonActionPerformed
 
     private void updatebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebuttonActionPerformed
-        // TODO add your handling code here:
+        updateCustomer();
     }//GEN-LAST:event_updatebuttonActionPerformed
 
     private void deletebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebuttonActionPerformed
-        // TODO add your handling code here:
+        deleteCustomer();
     }//GEN-LAST:event_deletebuttonActionPerformed
 
     private void custnametxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custnametxtfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custnametxtfieldActionPerformed
+
+    private void custidtxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custidtxtfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custidtxtfieldActionPerformed
+
+    private void custdobtxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custdobtxtfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custdobtxtfieldActionPerformed
+
+    private void custaddresstxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custaddresstxtfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_custaddresstxtfieldActionPerformed
+
+    private void tblCutomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCutomerMouseClicked
+        searchCustomer();
+    }//GEN-LAST:event_tblCutomerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -205,17 +282,126 @@ public class CustomerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel custaddresslabel;
+    private javax.swing.JTextField custaddresstxtfield;
+    private javax.swing.JLabel custdoblabel;
+    private javax.swing.JTextField custdobtxtfield;
     private javax.swing.JLabel custidlabel;
     private javax.swing.JTextField custidtxtfield;
     private javax.swing.JLabel custnamelabel;
     private javax.swing.JTextField custnametxtfield;
-    private javax.swing.JLabel custphonelabel;
-    private javax.swing.JTextField custphonetxtfield;
+    private javax.swing.JLabel custsalarylabel;
+    private javax.swing.JTextField custsalarytxtfield;
     private javax.swing.JButton deletebutton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton savebutton;
+    private javax.swing.JTable tblCutomer;
     private javax.swing.JButton updatebutton;
     // End of variables declaration//GEN-END:variables
+
+    private void saveCustomer(){
+        CustomerDto dto = new CustomerDto();
+        dto.setCustId(custidtxtfield.getText());
+        dto.setCustname(custnametxtfield.getText());
+        dto.setCustdob(custdobtxtfield.getText());
+        dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
+        dto.setCustaddress(custaddresstxtfield.getText());
+        try {
+            //String result = customerController.saveCustomer(dto);
+            //CustomerDto customerDto = new CustomerDto(custidtxtfield.getText(), custnametxtfield.getText(), custdobtxtfield.getText(), Double.parseDouble(custsalarytxtfield.getText()), custaddresstxtfield.getText());
+            String resp = customerController.save(dto);
+            JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    public void clear(){
+        custidtxtfield.setText("");
+        custnametxtfield.setText("");
+        custdobtxtfield.setText("");
+        custsalarytxtfield.setText("");
+        custaddresstxtfield.setText("");
+    }
+    
+    public void searchCustomer() {
+        try {
+            String custId = tblCutomer.getValueAt(tblCutomer.getSelectedRow(), 0).toString();
+            System.out.println(custId);
+            CustomerDto customerDto = customerController.getCustomer(custId);
+
+            if (customerDto != null) {
+                custidtxtfield.setText(customerDto.getCustId());
+                custnametxtfield.setText(customerDto.getCustname());
+                custdobtxtfield.setText(customerDto.getCustdob());
+                custsalarytxtfield.setText(Double.toString(customerDto.getCustsalary()));
+                custaddresstxtfield.setText(customerDto.getCustaddress());
+            } else {
+                JOptionPane.showMessageDialog(this, "Customer Not Found");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error at loading Customer Data");
+        }
+    }
+    
+    public void loadCustomers(){
+        try {
+            String columns[] = {"Id", "Name", "DOB", "Salary", "Address"};
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            
+            tblCutomer.setModel(dtm);
+
+            ArrayList<CustomerDto> customerDtos = customerController.getAllCustomer();
+
+            for (CustomerDto customerDto : customerDtos) {
+                Object[] rowData = {customerDto.getCustId(), customerDto.getCustname(), customerDto.getCustdob() , customerDto.getCustsalary(), customerDto.getCustaddress()};
+                dtm.addRow(rowData);  
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(bookingsystem.view.CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void updateCustomer(){
+        try {
+            CustomerDto dto = new CustomerDto();
+            dto.setCustId(custidtxtfield.getText());
+            dto.setCustname(custnametxtfield.getText());
+            dto.setCustdob(custdobtxtfield.getText());
+            dto.setCustsalary(Double.parseDouble(custsalarytxtfield.getText()));
+            dto.setCustaddress(custaddresstxtfield.getText());
+            String resp = customerController.updateCustomer(dto);
+            JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void deleteCustomer(){
+        try {
+            String custId = custidtxtfield.getText();
+            String resp = customerController.deleteCustomer(custId);
+            JOptionPane.showMessageDialog(this, resp);
+            loadCustomers();
+            clear();
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 }
