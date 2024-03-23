@@ -5,10 +5,10 @@
 package bookingsystem;
 
 import bookingsystem.view.CustomerView;
-import bookingsystem.view.LoginView;
 import bookingsystem.view.ManageRoomsCategoriesView;
 import bookingsystem.view.ManageRoomsView;
 import bookingsystem.view.ReservationView;
+import bookingsystem.view.loginvie;
 
 /**
  *
@@ -16,9 +16,19 @@ import bookingsystem.view.ReservationView;
  */
 
 public class Main {
+    private static loginvie loginView;
+
     public static void main(String[] args){
+        loginView = new loginvie();
+        loginView.setVisible(true);
+        // Call other views as needed
+    }
+    
+    public static void displayall(){
+        if (loginView != null) {
+            loginView.setVisible(false);
+        }
         new CustomerView().setVisible(true);
-        new LoginView().setVisible(true);
         new ManageRoomsCategoriesView().setVisible(true);
         new ManageRoomsView().setVisible(true);
         new ReservationView().setVisible(true);
